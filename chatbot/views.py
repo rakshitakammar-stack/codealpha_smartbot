@@ -50,7 +50,7 @@ def chat_api(request):
         # 4. Generate rule-based bot response
         bot_response = get_bot_response(user_message_clean)
 
-        # 5. Persist both user and bot messages to MySQL using Django ORM
+        # 5. Persist both user and bot messages using Django ORM
         try:
             ChatMessage.objects.create(
                 session_key=session_key,
@@ -66,7 +66,7 @@ def chat_api(request):
             logger.error(f"Database error saving chat message: {db_err}")
             return JsonResponse(
                 {
-                    'error': 'Database error while saving conversation. Please verify MySQL service in XAMPP.',
+                    'error': 'Database error while saving conversation.',
                     'details': 'Database connection failed.'
                 },
                 status=500
@@ -102,7 +102,7 @@ def history_api(request):
     except DatabaseError as db_err:
         logger.error(f"Database error fetching chat history: {db_err}")
         return JsonResponse(
-            {'error': 'Unable to retrieve chat history from MySQL. Please check XAMPP.'},
+            {'error': 'Unable to retrieve chat history from the database.'},
             status=500
         )
     except Exception as exc:
@@ -135,7 +135,7 @@ def clear_history_api(request):
     except DatabaseError as db_err:
         logger.error(f"Database error clearing chat history: {db_err}")
         return JsonResponse(
-            {'error': 'Database error while clearing history in MySQL.'},
+            {'error': 'Database error while clearing chat history.'},
             status=500
         )
     except Exception as exc:

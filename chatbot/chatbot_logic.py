@@ -48,7 +48,7 @@ RULES = [
         'triggers': [
             'who are you', 'what is your name', 'what is your title', 'who made you'
         ],
-        'response': "I am SmartBot Assistant, a rule-based AI chatbot built with Django and MySQL."
+        'response': "I am SmartBot Assistant, a rule-based AI chatbot built with Django and SQLite."
     },
     {
         'intent': 'gratitude',
